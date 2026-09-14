@@ -31,7 +31,7 @@ class LoginController extends Controller
  
         $request->session()->regenerate();
  
-        return redirect()->intended(route('dashboard.blade.php'));
+        return redirect()->route('dashboard');
     }
  
     public function destroy(Request $request): RedirectResponse

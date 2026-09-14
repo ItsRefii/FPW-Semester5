@@ -1,13 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $user = auth()->user();
+
+        if ($user->role === 'admin') {
+            return view('dashboard.admin');
+        }
+
+        if ($user->role === 'kasir') {
+            return view('dashboard.kasir');
+        }
+
+        abort(403, 'Role pengguna tidak dikenali.');
     }
 }
