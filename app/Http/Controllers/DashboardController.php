@@ -13,6 +13,8 @@ class DashboardController extends Controller
 
         if ($user->role === 'kasir') {
             return view('dashboard.kasir');
+
+            return view('dashboard', compact('products'));
         }
 
         abort(403, 'Role pengguna tidak dikenali.');

@@ -39,3 +39,11 @@ Route::get('/pos', [PosController::class, 'index'])
 Route::get('/pos', [PosController::class, 'index'])
     ->middleware('auth')
     ->name('pos.index');
+    
+Route::get('/pos/history', [PosController::class, 'history'])
+    ->middleware('auth')
+    ->name('pos.history');
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
