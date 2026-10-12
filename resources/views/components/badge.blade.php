@@ -13,4 +13,4 @@
 <span class="px-3 py-1 rounded-full text-sm font-semibold {{ $class }}">
     {{ $status }}
 </span>
-```
+

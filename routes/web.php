@@ -34,16 +34,9 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 Route::get('/pos', [PosController::class, 'index'])
-    ->name('pos.index');
-
-Route::get('/pos', [PosController::class, 'index'])
     ->middleware('auth')
     ->name('pos.index');
     
 Route::get('/pos/history', [PosController::class, 'history'])
     ->middleware('auth')
     ->name('pos.history');
-
-
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');

@@ -9,17 +9,20 @@
             <x-card>
                 <h3 class="text-lg font-semibold mb-2">Ringkasan Hari Ini</h3>
                 <p class="text-gray-600">Selamat datang, {{ auth()->user()->name }}.</p>
+
+                <h3 class="text-lg font-semibold mt-4 mb-2">Status Stok</h3>
+                <p class="text-gray-600">Berikut adalah status stok barang di toko.</p>
+                <div class="mt-4">
+                    <x-badge status="Aman"/>
+                    <x-badge status="Menipis"/>
+                    <x-badge status="Habis"/>
+                </div>
             </x-card>
+
         </div>
     </div>
 
-    <h3 class="text-lg font-semibold mb-4">Status Stok</h3>
 
-    <div class="flex gap-3">
-        <x-badge status="Aman" />
-        <x-badge status="Menipis" />
-        <x-badge status="Habis" />
-    </div>
 
 
 </x-app-layout>
