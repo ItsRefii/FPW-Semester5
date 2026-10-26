@@ -11,7 +11,7 @@
                     Dashboard
                 </a>
 
-                @if (auth()->user()->role === 'admin')
+                @if (auth()->user()?->role === 'admin')
 
                     <a href="{{ route('users.index') }}"
                         class="{{ request()->routeIs('users.*') ? 'text-indigo-600' : 'text-gray-500' }}">
@@ -23,6 +23,11 @@
                         Kategori
                     </a>
 
+                    <a href="{{ route('products.index') }}"
+                        class="{{ request()->routeIs('products.*') ? 'text-indigo-600' : 'text-gray-500' }}">
+                        Produk
+                    </a>
+
                 @endif
 
                 <a href="{{ route('pos.index') }}"
@@ -30,7 +35,7 @@
                     Transaksi
                 </a>
                 
-                @if (auth()->user()->role === 'kasir') 
+                @if (auth()->user()?->role === 'kasir') 
                 <a href="{{ route('pos.history') }}" class="{{ request()->routeIs('pos.history') ? 'text-indigo-600' : 'text-gray-500' }}">
                     Riwayat Transaksi Saya 
                 </a>
@@ -41,7 +46,7 @@
             <div class="flex items-center space-x-4 text-sm">
 
                 <span class="text-gray-600">
-                    {{ auth()->user()->name }}
+                    {{ auth()->user()?->name }}
                 </span>
 
                 <form action="{{ route('logout') }}" method="POST">

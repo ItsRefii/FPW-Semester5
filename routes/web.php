@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PosController;
 
 
@@ -26,6 +27,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('users', UserController::class);
 
     Route::resource('categories', CategoryController::class);
+
+    Route::get('products/edit', function () {
+        return redirect()->route('products.index')->with('info', 'Silakan pilih produk yang ingin diedit dari tabel di bawah.');
+    });
+
+    Route::resource('products', ProductController::class);
 });
 
 
