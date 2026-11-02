@@ -43,7 +43,15 @@ Route::get('/dashboard', function () {
 Route::get('/pos', [PosController::class, 'index'])
     ->middleware('auth')
     ->name('pos.index');
-    
+
 Route::get('/pos/history', [PosController::class, 'history'])
     ->middleware('auth')
     ->name('pos.history');
+
+
+Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
+    Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
+    Route::post('/pos', [PosController::class, 'store'])->name('pos.store');
+    Route::get('/pos/{transaction}/struk', [PosController::class, 'struk'])->name('pos.struk');
+});
+

@@ -29,7 +29,8 @@
                     </div>
                 @endif
 
-                <form method="GET" action="{{ route('products.index') }}" class="flex flex-wrap gap-3 mb-6 items-center">
+                <form method="GET" action="{{ route('products.index') }}"
+                    class="flex flex-wrap gap-3 mb-6 items-center">
                     <input type="text" name="search" value="{{ request('search') }}"
                         placeholder="Cari nama atau kode produk..."
                         class="flex-1 min-w-[200px] rounded-md border-gray-300 shadow-sm text-sm">
@@ -43,12 +44,15 @@
                         @endforeach
                     </select>
 
-                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                    <button type="submit"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
                         Cari
                     </button>
-                    <a href="{{ route('products.index') }}" class="px-4 py-2 text-gray-500 hover:text-gray-700 text-sm font-medium">
+                    <a href="{{ route('products.index') }}"
+                        class="px-4 py-2 text-gray-500 hover:text-gray-700 text-sm font-medium">
                         Reset
                     </a>
+
                 </form>
 
                 <div class="overflow-x-auto">
@@ -56,62 +60,65 @@
                         <thead class="bg-gray-50">
 
 
-                        <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Kode</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Nama Produk</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Kategori</th>
-                            <th class="px-4 py-2 text-right text-xs font-medium text-gray-500">Harga</th>
-                            <th class="px-4 py-2 text-center text-xs font-medium text-gray-500">Stok</th>
-                            <th class="px-4 py-2 text-center text-xs font-medium text-gray-500">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        @forelse ($products as $product)
-                            <tr
-                                class="@if ($product->stock == 0) bg-red-50 @elseif ($product->stock < 10) bg-yellow-50 @endif">
-                                <td class="px-4 py-2 text-sm">{{ $product->code }}</td>
-                                <td class="px-4 py-2 text-sm">{{ $product->name }}</td>
-                                <td class="px-4 py-2 text-sm">{{ $product->category->name }}</td>
-                                <td class="px-4 py-2 text-sm text-right">
-                                    Rp{{ number_format($product->price, 0, ',', '.') }}
-                                </td>
-                                <td class="px-4 py-2 text-sm text-center font-semibold">
-                                    {{ $product->stock }}
-                                    @if ($product->stock == 0)
-                                        <span class="text-red-600 text-xs block">Habis</span>
-                                    @elseif ($product->stock < 10)
-                                        <span class="text-yellow-600 text-xs block">Menipis</span>
-                                    @endif
-                                </td>
-                                <td class="px-4 py-2 text-sm text-center">
-                                    <div class="flex justify-center items-center space-x-2">
-                                        <a href="{{ route('products.edit', $product->id) }}"
-                                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
-                                            Edit
-                                        </a>
-
-                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST"
-                                            class="inline"
-                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold transition">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
                             <tr>
-                                <td colspan="6" class="px-4 py-6 text-center text-gray-500">
-                                    Belum ada data produk.
-                                </td>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Kode</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Nama Produk</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Kategori</th>
+                                <th class="px-4 py-2 text-right text-xs font-medium text-gray-500">Harga</th>
+                                <th class="px-4 py-2 text-center text-xs font-medium text-gray-500">Stok</th>
+                                <th class="px-4 py-2 text-center text-xs font-medium text-gray-500">Aksi</th>
                             </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            @forelse ($products as $product)
+                                <tr
+                                    class="@if ($product->stock == 0) bg-red-50 @elseif ($product->stock < 10) bg-yellow-50 @endif">
+                                    <td class="px-4 py-2 text-sm">{{ $product->code }}</td>
+                                    <td class="px-4 py-2 text-sm">{{ $product->name }}</td>
+                                    <td class="px-4 py-2 text-sm">{{ $product->category->name }}</td>
+                                    <td class="px-4 py-2 text-sm text-right">
+                                        Rp{{ number_format($product->price, 0, ',', '.') }}
+                                    </td>
+                                    <td class="px-4 py-2 text-sm text-center font-semibold">
+                                        {{ $product->stock }}
+                                        @if ($product->stock == 0)
+                                            <span class="text-red-600 text-xs block">Habis</span>
+                                        @elseif ($product->stock < 10)
+                                            <span class="text-yellow-600 text-xs block">Menipis</span>
+                                        @endif
+                                    </td>
+
+                                    <td class="px-4 py-2 text-sm text-center">
+                                        <div class="flex justify-center items-center space-x-2">
+                                            <a href="{{ route('product.show', $product->id) }}"
+                                                class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded text-xs font-semibold transition">Detail</a>
+                                            <a href="{{ route('products.edit', $product->id) }}"
+                                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                                Edit
+                                            </a>
+
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                                class="inline"
+                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="px-4 py-6 text-center text-gray-500">
+                                        Belum ada data produk.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="mt-4">
