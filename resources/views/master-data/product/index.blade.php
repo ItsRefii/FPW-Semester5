@@ -29,26 +29,31 @@
                     </div>
                 @endif
 
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+                <form method="GET" action="{{ route('products.index') }}" class="flex flex-wrap gap-3 mb-6 items-center">
+                    <input type="text" name="search" value="{{ request('search') }}"
+                        placeholder="Cari nama atau kode produk..."
+                        class="flex-1 min-w-[200px] rounded-md border-gray-300 shadow-sm text-sm">
 
-                        <form method="GET" action="{{ route('products.index') }}" class="flex gap-3 mb-4">
-                            <input type="text" name="search" value="{{ request('search') }}"
-                                placeholder="Cari nama atau kode produk..."
-                                class="flex-1 rounded-md border-gray-300 shadow-sm">
+                    <select name="category_id" class="rounded-md border-gray-300 shadow-sm text-sm">
+                        <option value="">Semua Kategori</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" @selected(request('category_id') == $category->id)>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
 
-                            <select name="category_id" class="rounded-md border-gray-300">
-                                <option value="">Semua Kategori</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" @selected(request('category_id') == $category->id)>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+                        Cari
+                    </button>
+                    <a href="{{ route('products.index') }}" class="px-4 py-2 text-gray-500 hover:text-gray-700 text-sm font-medium">
+                        Reset
+                    </a>
+                </form>
 
-                            <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md">Cari</button>
-                            <a href="{{ route('products.index') }}" class="px-4 py-2 text-gray-500">Reset</a>
-                        </form>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
 
 
                         <tr>
@@ -107,6 +112,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                </div>
 
                 <div class="mt-4">
                     {{ $products->links() }}

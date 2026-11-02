@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
@@ -39,7 +40,18 @@ class ProductController extends Controller
             $query->where('category_id', $request->category_id);
         }
 
-        $products = $query->latest()->paginate(10)->withQueryString();
+        if ($request->filled('stock_status')) {
+            if ($request->stock_status === 'habis') {
+                $query->where('stock', 0);
+            } elseif ($request->stock_status === 'menipis') {
+                $query->where('stock', '>', 0)->where('stock', '<', 10);
+            } elseif ($request->stock_status === 'tersedia') {
+                $query->where('stock', '>=', 10);
+            }
+        }
+
+        $perPage = in_array($request->per_page, [10, 25, 50]) ? (int) $request->per_page : 10;
+        $products = $query->latest()->paginate($perPage)->withQueryString();
         $categories = Category::orderBy('name')->get();
 
         return view('master-data.product.index', compact('products', 'categories'));
