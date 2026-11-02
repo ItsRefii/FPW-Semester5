@@ -90,7 +90,7 @@
 
                                     <td class="px-4 py-2 text-sm text-center">
                                         <div class="flex justify-center items-center space-x-2">
-                                            <a href="{{ route('product.show', $product->id) }}"
+                                            <a href="{{ route('products.show', $product->id) }}"
                                                 class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded text-xs font-semibold transition">Detail</a>
                                             <a href="{{ route('products.edit', $product->id) }}"
                                                 class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
